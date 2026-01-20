@@ -1,0 +1,8 @@
+langchain
+langchain-openai
+paramiko
+pyyaml
+python-dotenv
+click
+loguru
+pydantic
