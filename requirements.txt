@@ -3,3 +3,4 @@ paramiko
 pyyaml
 python-dotenv
 pydantic
+langchain-openai
