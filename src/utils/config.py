@@ -34,3 +34,19 @@ class ConfigLoader:
     @property
     def key_file(self) -> str:
         return self._config.get("key_file", "")
+
+    @property
+    def ai_provider(self) -> str:
+        """Returns the AI provider (openai, gemini, ollama). Defaults to openai."""
+        # Check nested structure first: ai_model: { provider: ... }
+        if "ai_model" in self._config and "provider" in self._config["ai_model"]:
+            return self._config["ai_model"]["provider"]
+        return self._config.get("ai_provider", "openai")
+
+    @property
+    def ai_model_name(self) -> str:
+        """Returns the specific model name. Defaults to None (let provider pick default)."""
+        if "ai_model" in self._config and "model_name" in self._config["ai_model"]:
+            return self._config["ai_model"]["model_name"]
+        return self._config.get("ai_model_name", None)
+

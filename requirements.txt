@@ -1,5 +1,9 @@
 langchain
 langchain-openai
+langchain-google-genai
+langchain-community
+beautifulsoup4
+requests
 paramiko
 pyyaml
 python-dotenv

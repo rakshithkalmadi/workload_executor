@@ -38,7 +38,11 @@ def agent(workload):
 
     # 3. Initialize Agent
     try:
-        lex_agent = LexAIAgent(ssh_connection=ssh)
+        lex_agent = LexAIAgent(
+            ssh_connection=ssh,
+            ai_provider=config_loader.ai_provider,
+            ai_model_name=config_loader.ai_model_name
+        )
     except Exception as e:
         logger.error(f"Failed to initialize agent: {e}")
         return
