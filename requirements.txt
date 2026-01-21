@@ -4,3 +4,7 @@ pyyaml
 python-dotenv
 pydantic
 langchain-openai
+langchain-community
+langgraph
+langchain-google-genai
+beautifulsoup4
