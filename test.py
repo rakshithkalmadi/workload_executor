@@ -110,4 +110,10 @@ response = agent.invoke(
     context=Context(user_id="1")
 )
 
-print(response['structured_response'])
+result = response['structured_response']
+print(result)
+
+# Execute on remote VM (uncomment to run)
+from ssh_executor import execute_response
+success = execute_response(result)
+print(f"\nRemote execution {'succeeded' if success else 'failed'}")
