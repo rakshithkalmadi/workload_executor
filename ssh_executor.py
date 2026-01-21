@@ -81,8 +81,8 @@ def execute_on_remote(
             exit_status = stdout.channel.recv_exit_status()
             if exit_status != 0:
                 print(f"  [FAILED] Exit code: {exit_status}")
-                all_success = False
-                # Continue with other commands instead of stopping
+                print(f"  [STOPPING] First failure encountered, aborting remaining commands.")
+                return False
             else:
                 print(f"  [OK]")
         
