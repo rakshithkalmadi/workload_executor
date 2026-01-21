@@ -34,27 +34,30 @@ When a user provides a URL of a software repository or project:
 ### Step 2: Extract Direct Download URLs
 From the releases page, find and return the ACTUAL file download links:
 - GitHub releases follow this pattern: `https://github.com/<owner>/<repo>/releases/download/<tag>/<filename>`
-- Look in the "Assets" section for binary downloads (.zip, .tar.gz, .deb, .rpm, .exe)
+- Look in the "Assets" section for binary downloads (.tar.gz, .deb, .rpm, .AppImage)
+- **TARGET OS: Linux** - Always prefer Linux binaries. Look for filenames containing "linux", "Linux", or ".deb", ".rpm".
 - **ONLY return the LATEST release URLs** (the one marked as "Latest" or the first one listed).
-- **DO NOT** return URLs from older versions.
+- **DO NOT** return Windows (.exe, .zip with "Windows") or macOS binaries.
 
 ### Step 3: Extract Installation Commands
 **CRITICAL**: Prefer the SIMPLEST installation method:
 
-1. **If pre-built binaries exist** (you found .zip, .tar.gz, .exe, etc. in releases):
+1. **If Linux pre-built binaries exist** (you found .tar.gz, .deb, .rpm, .AppImage for Linux):
    - Provide commands to DOWNLOAD and USE the binary directly.
-   - Example: `wget <url>`, `tar -xzf <file>`, `./<program> --help`
-   - Do NOT suggest building from source if binaries are available.
+   - Example for tar.gz: `wget <url>`, `tar -xzf <file>`, `./<program> --help`
+   - Example for .deb: `wget <url>`, `sudo dpkg -i <file>`
+   - Do NOT suggest building from source if Linux binaries are available.
 
-2. **Only if NO binaries exist**, provide build-from-source commands:
-   - git clone, cmake, make, etc.
+2. **If NO Linux binaries exist**, provide build-from-source commands:
+   - `git clone <repo>`, `cd <dir>`, `mkdir build && cd build`, `cmake ..`, `make`
+   - Include any dependencies mentioned in the README (e.g., `sudo apt install cmake g++`).
 
 Each command should be a **single, standalone shell command**.
 
 ### Step 4: Return Structured Response
 - `summary`: Brief description of what the software does.
-- `installation_steps`: List of individual shell commands (prefer binary download over building).
-- `download_urls`: List of direct file download URLs (LATEST release only).
+- `installation_steps`: List of individual shell commands (prefer Linux binary download, fallback to building).
+- `download_urls`: List of direct Linux download URLs (LATEST release only). Empty list if no binaries.
 - `verification_command`: A command to verify the installation worked."""
 
 # Define context schema
